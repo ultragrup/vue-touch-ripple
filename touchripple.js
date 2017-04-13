@@ -10,6 +10,7 @@ const startRipple = function(eventType, event) {
 
   // 获取事件目标元素
   var holder = event.currentTarget || event.target
+  var specificTarget = event.currentTarget || event.target // Added by UGS
 
   // console.log(holder)
 
@@ -37,31 +38,38 @@ const startRipple = function(eventType, event) {
     y = event.clientY - rect.top
   }
 
-  var ripple = document.createElement('div')
-  var max
+  if(specificTarget.className != 'wrapper') {
 
-  if (rect.width === rect.height) {
-    max = rect.width * 1.412
-  } else {
-    max = Math.sqrt(
-      (rect.width * rect.width) + (rect.height * rect.height)
-    )
+    var ripple = document.createElement('div')
+    var max
+
+    if (rect.width === rect.height) {
+      max = rect.width * 1.412
+    } else {
+      max = Math.sqrt(
+        (rect.width * rect.width) + (rect.height * rect.height)
+      )
+    }
+
+    var dim = (max * 2) + 'px'
+
+    ripple.style.width = dim
+    ripple.style.height = dim
+    ripple.style.marginLeft = -max + x + 'px'
+    ripple.style.marginTop = -max + y + 'px'
+
+    // Activate/add the element
+    ripple.className = 'ripple'
+
   }
 
-  var dim = (max * 2) + 'px'
-
-  ripple.style.width = dim
-  ripple.style.height = dim
-  ripple.style.marginLeft = -max + x + 'px'
-  ripple.style.marginTop = -max + y + 'px'
-
-  // Activate/add the element
-  ripple.className = 'ripple'
-  holder.appendChild(ripple)
+  if(specificTarget.className != 'wrapper') { // Added by UGS
+    holder.appendChild(ripple) // Modified by UGS
+  }
 
   setTimeout(function() {
     classlist.add(ripple, 'held')
-  }, 0)
+  }, 850) // Modified by UGS
 
   var releaseEvent = (eventType === 'mousedown' ? 'mouseup' : 'touchend')
 
@@ -72,13 +80,16 @@ const startRipple = function(eventType, event) {
 
     // Larger than the animation duration in CSS
     setTimeout(function() {
-      holder.removeChild(ripple)
+      if(ripple) {
+        holder.removeChild(ripple) // Modified by UGS
+      }
+
 
       if (!holder.children.length) {
         classlist.remove(holder, 'active')
         holder.removeAttribute('data-ui-event')
       }
-    }, 450)
+    }, 1050) // Modified by UGS
   }
 
   document.addEventListener(releaseEvent, release)

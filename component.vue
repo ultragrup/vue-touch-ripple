@@ -70,9 +70,9 @@
     -webkit-transform: scale(0);
         -ms-transform: scale(0);
             transform: scale(0);
-    transition: opacity 0.4s ease-out, -webkit-transform 0.4s ease-out;
-    transition: transform 0.4s ease-out, opacity 0.4s ease-out;
-    transition: transform 0.4s ease-out, opacity 0.4s ease-out, -webkit-transform 0.4s ease-out;
+    transition: opacity 1s ease-out, -webkit-transform 1s ease-out;
+    transition: transform 1s ease-out, opacity 1s ease-out;
+    transition: transform 1s ease-out, opacity 1s ease-out, -webkit-transform 1s ease-out;
   }
 
   .touch-ripple .ripple.held {
