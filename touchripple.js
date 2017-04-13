@@ -107,3 +107,4 @@ module.exports = {
   handleMouseDown: handleMouseDown,
   handleTouchStart: handleTouchStart
 }
+
