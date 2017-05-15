@@ -6,7 +6,7 @@
 const classlist = require('./classlist')
 
 // startRipple
-const startRipple = function(eventType, event) {
+var startRipple = function(eventType, event) {
 
   // 获取事件目标元素
   var holder = event.currentTarget || event.target
@@ -118,4 +118,3 @@ module.exports = {
   handleMouseDown: handleMouseDown,
   handleTouchStart: handleTouchStart
 }
-
